@@ -89,7 +89,7 @@ var Game_board=function(char,level_no,character)
     this.End_Game_board= function(interval)
     {
         setTimeout(function () {
-        //console.log("TIMEout");
+       
         clearInterval(interval);
       },10000)
     };
@@ -159,8 +159,7 @@ Game_board.prototype.Prepare_Game_board = function()
     for(var i=0;i<this.Game_object_arr.length;i++)
     {
        content.appendChild(this.Game_object_arr[i].Get_image());
-       //console.log(this.Game_object_arr[i].Get_x_current())
-      // console.log(this.Game_object_arr[i].Get_y_current())
+
     }
 };
 Game_board.prototype.Start_Game_board = function()
@@ -172,14 +171,14 @@ Game_board.prototype.Start_Game_board = function()
     }
     var xcurr=this.Game_object_arr[i].Get_x_current();
     var ycurr=this.Game_object_arr[i].Get_y_current();
-    //console.log(xcurr)
+
     var x=this.Game_object_arr[i].Get_step_x();
-    //console.log(x);
+
     var y=this.Game_object_arr[i].Get_step_y();
     if((xcurr>=445) || (xcurr<=0))
     {
       this.Game_object_arr[i].Set_step_x(-x);
-      //console.log(this.Game_object_arr[i].Get_step_x())
+  
     }
     if((ycurr>=770) || (ycurr<=0))
     {
@@ -187,10 +186,10 @@ Game_board.prototype.Start_Game_board = function()
     }
     this.Game_object_arr[i].Set_x_current(this.Game_object_arr[i].Get_x_current()+this.Game_object_arr[i].Get_step_x());
     this.Game_object_arr[i].Set_y_current(this.Game_object_arr[i].Get_y_current()+this.Game_object_arr[i].Get_step_y());
-    // console.log(this.Game_object_arr[i].Get_x_current());
+
     (this.Game_object_arr[i].img).style.top =  this.Game_object_arr[i].Get_x_current() + 'px';
     (this.Game_object_arr[i].img).style.left = this.Game_object_arr[i].Get_y_current() + 'px';
-    //console.log(this.Game_object_arr[i].Get_x_current())
+ 
 };
 Game_board.prototype.Change_Game_board = function()
 {

@@ -1,0 +1,13 @@
+body {
+background-size: cover;
+}
+
+#pressany{
+font-family:Comic Sans MS, Comic Sans, cursive ;
+font-size: 35px;
+color:#cc6600;
+position: absolute;
+top: 560px;
+left: 420px;
+right:420px;
+}

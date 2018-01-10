@@ -1,0 +1,81 @@
+body {
+text-align: center;
+background-size:cover; 
+background-repeat: no-repeat;
+cursor: pointer;
+}
+h1 { 
+	color: blue;
+	 font-family: 'Trocchi', serif;
+	font-size: 45px; 
+	font-weight: normal; 
+ 	line-height: 48px; margin: 0; 
+}
+
+h2 { 
+	color: blue; 
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 28px; 
+	font-weight: 400;
+	line-height: 32px;
+ 	margin: 0 0 24px;
+ }
+
+#text {
+position: absolute;
+    left:520px;
+    right:270px;
+    top: 190px;
+    width: 300px;
+    padding: 10px;
+
+}
+
+#trumb {
+position: absolute;
+    right:20px;
+    top: 33px;
+    width: 230px;
+    padding: 10px;
+    height: 210px;
+}
+
+#drum {
+	position: absolute;
+    left:450px;
+    right:330px;
+    top: 400px;
+    width: 410px;
+    height: 220;
+    padding: 10px;
+}
+
+#tar {
+    position: absolute;
+    left:20px;
+    right:300px;
+    top: 350px;
+    width: 230px;
+    padding: 10px;
+    height: 220px;
+}
+#s1 {
+position: absolute;
+    right:20px;
+    top: 350px;
+    width: 230px;
+    padding: 10px;
+    height: 210px	
+}
+
+#s2 {
+
+	position: absolute;
+    left:20px;
+    right:300px;
+    top: 35px;
+    width: 230px;
+    padding: 10px;
+    height: 220px;
+}
+}

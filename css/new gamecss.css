@@ -1,0 +1,44 @@
+body {
+     background-size:cover; 
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+#sound img {
+    position: fixed ; /*absolute;*/
+    top: 1%;
+    right: 1%;
+    width: 50px;
+    height: 50px;
+}
+.button {
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  width: 250px;
+  cursor: pointer;
+  outline: none;
+  color: #FFD700;
+  background-color: #4682B4; 
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 5px #999; /*shadow color*/
+  display: block;
+}
+.button:hover {background-color: #396a93}
+
+.button:active {
+  background-color:	#FFD700; 
+  color: #4682B4;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.menu {
+    height: 200px;
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -150px;
+}

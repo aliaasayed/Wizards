@@ -26,7 +26,7 @@ function level_map(){
   level++;
   //var Board_1;
   var image=document.getElementById('ch');
-  console.log(minions_Link)
+  //console.log(minions_Link)
   if(minions_Link==true)
   {
     image.setAttribute("src","img/minion.png");
@@ -65,8 +65,8 @@ function level_map(){
   Board_1.Prepare_Game_board();
   var id=setInterval(function(){Board_1.Start_Game_board()},1);
   Board_1.End_Game_board(id);
-  //Board_1.timer();
-  //Board_1.GetValueOfTimer();
+  Board_1.timer();
+  Board_1.GetValueOfTimer();
 }
 
 var next = document.getElementsByTagName('button')
@@ -77,6 +77,7 @@ next[0].addEventListener('click',function() {
 })
 /*End map level js*/
 var i=-1;
+var counter=0;
 var Game_object =function(src_image)
 {
     this.x_current;
@@ -308,8 +309,8 @@ Game_board.prototype.GetValueOfTimer=function()
     var TimeInterval=setInterval(function(){
     var Timer_Value=document.getElementById("timer").innerHTML;
     Split_TimeValues=Timer_Value.split(":");
-    console.log(Split_TimeValues[2]);
-    if(this.counter==2 && parseInt(Split_TimeValues[1])==1 &&parseInt(Split_TimeValues[2])>=30)
+    //console.log(Split_TimeValues[2]);
+    if(counter==2 && parseInt(Split_TimeValues[1])==1 &&parseInt(Split_TimeValues[2])>=30)
     {
     stop_flag=true;
     alert("you have got a faster badge");
@@ -333,13 +334,13 @@ Game_board.prototype.Game_result = function()
 {
   var char_img =document.getElementsByClassName('img1');
   var ch=this.char;
-  var counter=this.counter;
   for (var i = 0; i < char_img.length; i++) {
     char_img[i].onclick=function(e){
       if(ch==1)
       {
       e.target.src='img/minion.png';
       counter++;
+      //this.counter=counter;
       cou(counter)
       //console.log(this.counter);
     }
@@ -349,11 +350,10 @@ Game_board.prototype.Game_result = function()
         cou(counter)
       }
     }
-    //console.log(counter)
+    //console.log(this.counter)
   }
   function cou(counter)
   {
-    console.log(this.level)
   if(counter==2 && this.level==1)
   {
     document.getElementsByClassName('game')[0].style.display="none"
@@ -376,6 +376,7 @@ Game_board.prototype.Game_result = function()
     level_map();
   }
 }
+//console.log(counter)
   var box_img =document.getElementsByClassName('img2')
   for (var i = 0; i < box_img.length; i++) {
     box_img[i].onclick=function()

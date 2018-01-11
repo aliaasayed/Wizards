@@ -1,5 +1,82 @@
+/*Begin choose character js*/
+var smurfs_Link=false;
+var minions_Link=false;
+var Imgs=document.getElementsByClassName("choose_char");
+Imgs[0].addEventListener("click",clicked_func_s);
+Imgs[1].addEventListener("click",clicked_func_m);
+ function clicked_func_s()
+ {
+    smurfs_Link=true;
+    document.getElementsByClassName('choose_character')[0].style.display="none";
+    document.getElementsByClassName('map')[0].style.display="block";
+    level_map();
+ }
+ function clicked_func_m()
+ {
+    minions_Link=true;
+    document.getElementsByClassName('choose_character')[0].style.display="none";
+    document.getElementsByClassName('map')[0].style.display="block";
+    level_map();
+ }
+/*End choose character js*/
+
+/*Begin map level js*/
+var level=0;
+function level_map(){
+  level++;
+  //var Board_1;
+  var image=document.getElementById('ch');
+  console.log(minions_Link)
+  if(minions_Link==true)
+  {
+    image.setAttribute("src","img/minion.png");
+    var Board_1=new Game_board(1,level,1);
+  }
+  else if(smurfs_Link==true)
+  {
+    image.setAttribute("src","img/sinfor.png");
+    var Board_1=new Game_board(2,level,1);
+  }
+  if(level==1)
+  {
+    setTimeout(function()
+    {
+      image.style.position = "absolute";
+    	image.style.right="950px";
+    },1000)
+  }
+  else if (level==2)
+  {
+    setTimeout(function()
+    {
+    	image.style.position = "absolute";
+    	image.style.right="650px";
+    },1000)
+
+  }
+  else if (level==3)
+  {
+    setTimeout(function()
+    {
+      image.style.position = "absolute";
+      image.style.right="350px";
+    },1000)
+  }
+  Board_1.Prepare_Game_board();
+  var id=setInterval(function(){Board_1.Start_Game_board()},1);
+  Board_1.End_Game_board(id);
+  //Board_1.timer();
+  //Board_1.GetValueOfTimer();
+}
+
+var next = document.getElementsByTagName('button')
+next[0].addEventListener('click',function() {
+  document.getElementsByClassName('map')[0].style.display="none";
+  document.getElementById('header').style.display="block";
+  document.getElementsByClassName('game')[0].style.display="block";
+})
+/*End map level js*/
 var i=-1;
-var counter=0;
 var Game_object =function(src_image)
 {
     this.x_current;
@@ -77,6 +154,8 @@ Game_object.prototype.Get_y_current = function()
 var Game_board=function(char,level_no,character)
 {
     this.level;
+    this.counter=0;
+    //localStorage.setItem("level_no",this.level);
     this.char=char;
     //this.timer;
     this.character;
@@ -90,7 +169,7 @@ var Game_board=function(char,level_no,character)
     this.End_Game_board= function(interval)
     {
         setTimeout(function () {
-       
+
         clearInterval(interval);
       },10000)
     };
@@ -179,7 +258,7 @@ Game_board.prototype.Start_Game_board = function()
     if((xcurr>=445) || (xcurr<=0))
     {
       this.Game_object_arr[i].Set_step_x(-x);
-  
+
     }
     if((ycurr>=770) || (ycurr<=0))
     {
@@ -194,38 +273,52 @@ Game_board.prototype.Start_Game_board = function()
 };
 Game_board.prototype.timer=function()
 {
-var Total_Time=new Date();
-setTimeout(function(){
- Total_Time.setMinutes(1,59,0);
- var stop=false;
-	var startTime=new Date().getTime();
-	var time_difference=setInterval(
-		function(){
-	var currentTime=new Date().getTime();
-	var difference=currentTime-startTime;
+    var Total_Time=new Date();
+    setTimeout(function(){
+    Total_Time.setMinutes(1,59,0);
+    var stop=false;
+    var startTime=new Date().getTime();
+    var time_difference=setInterval(
+    function(){
+    var currentTime=new Date().getTime();
+    var difference=currentTime-startTime;
     var minutes=Math.floor((difference%(1000*60*60)/(1000*60)));
     var seconds=Math.floor((difference%(1000*60))/1000);
-    
-     
-     var Minutes_countDown=(Total_Time.getMinutes()-minutes);
-     var seconds_countDown=(Total_Time.getSeconds()-seconds);
-     var zero_char="";
-     if(seconds_countDown<10)
-     {
-             zero_char="0";
-     }
-     document.getElementById("timer").innerHTML="timer: 0"+Minutes_countDown+":"+zero_char+seconds_countDown;
+    var Minutes_countDown=(Total_Time.getMinutes()-minutes);
+    var seconds_countDown=(Total_Time.getSeconds()-seconds);
+    var zero_char="";
+    if(seconds_countDown<10)
+    {
+       zero_char="0";
+    }
+    document.getElementById("timer").innerHTML="timer: 0"+Minutes_countDown+":"+zero_char+seconds_countDown;
+    if(Minutes_countDown===0 && seconds_countDown===0)
+    {stop=true;}
+    if(stop==true)
+    {
+    clearInterval(time_difference);
+    }
+    });
+    },10000);
+}
 
-     if(Minutes_countDown===0 && seconds_countDown===0)
-     {stop=true;}
-     if(stop==true)
-	{
-		clearInterval(time_difference);
-	}
-    
-	});
-},10000);
-
+Game_board.prototype.GetValueOfTimer=function()
+{
+    var stop_flag=false;
+    var TimeInterval=setInterval(function(){
+    var Timer_Value=document.getElementById("timer").innerHTML;
+    Split_TimeValues=Timer_Value.split(":");
+    console.log(Split_TimeValues[2]);
+    if(this.counter==2 && parseInt(Split_TimeValues[1])==1 &&parseInt(Split_TimeValues[2])>=30)
+    {
+    stop_flag=true;
+    alert("you have got a faster badge");
+    }
+    if(stop_flag==true)
+    {
+    clearInterval(TimeInterval);
+    }
+    },1000);
 }
 Game_board.prototype.Change_Game_board = function()
 {
@@ -235,65 +328,60 @@ Game_board.prototype.Change_Game_board = function()
       char_img[i].src='img/box.png';
     }
   },7000)
-
-
 }
-
 Game_board.prototype.Game_result = function()
 {
   var char_img =document.getElementsByClassName('img1');
   var ch=this.char;
+  var counter=this.counter;
   for (var i = 0; i < char_img.length; i++) {
     char_img[i].onclick=function(e){
       if(ch==1)
       {
       e.target.src='img/minion.png';
+      counter++;
+      cou(counter)
+      //console.log(this.counter);
     }
       else {
         e.target.src='img/sinfor.png';
+        counter++;
+        cou(counter)
       }
-   counter++;
-console.log(counter);
     }
-
+    //console.log(counter)
   }
+  function cou(counter)
+  {
+    console.log(this.level)
+  if(counter==2 && this.level==1)
+  {
+    document.getElementsByClassName('game')[0].style.display="none"
+    document.getElementById('header').style.display="none"
+    document.getElementsByClassName('map')[0].style.display="block"
+    level_map();
+  }
+  if(counter==4 && this.level==2)
+  {
+    document.getElementsByClassName('game')[0].style.display="none"
+    document.getElementById('header').style.display="none"
+    document.getElementsByClassName('map')[0].style.display="block"
+    level_map();
+  }
+  if(counter==6 && this.level==3)
+  {
+    document.getElementsByClassName('game')[0].style.display="none"
+    document.getElementById('header').style.display="none"
+    document.getElementsByClassName('map')[0].style.display="block"
+    level_map();
+  }
+}
   var box_img =document.getElementsByClassName('img2')
   for (var i = 0; i < box_img.length; i++) {
     box_img[i].onclick=function()
     {
       alert("looooser");
+      //window.location.assign('level map.html')
     }
   }
 }
-Game_board.prototype.GetValueOfTimer=function()
-{
-var stop_flag=false;
-
- var TimeInterval=setInterval(function(){
- var Timer_Value=document.getElementById("timer").innerHTML;
- Split_TimeValues=Timer_Value.split(":");
- console.log(Split_TimeValues[2]);
-
-  if(counter==2 && parseInt(Split_TimeValues[1])==1 &&parseInt(Split_TimeValues[2])>=30)
-  {
-    stop_flag=true;
-    alert("you have got a faster badge");
-
-  }
-if(stop_flag==true)
-{
-clearInterval(TimeInterval);
-}
-
-},1000);
-
-
-
-}
-var Board_1=new Game_board(1,1,1);
-Board_1.Prepare_Game_board();
-var id=setInterval(function(){Board_1.Start_Game_board()},1);
-Board_1.End_Game_board(id);
-Board_1.timer();
-Board_1.GetValueOfTimer();
-

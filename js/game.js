@@ -1,4 +1,5 @@
 var i=-1;
+var counter=0;
 var Game_object =function(src_image)
 {
     this.x_current;
@@ -189,8 +190,43 @@ Game_board.prototype.Start_Game_board = function()
 
     (this.Game_object_arr[i].img).style.top =  this.Game_object_arr[i].Get_x_current() + 'px';
     (this.Game_object_arr[i].img).style.left = this.Game_object_arr[i].Get_y_current() + 'px';
- 
+
 };
+Game_board.prototype.timer=function()
+{
+var Total_Time=new Date();
+setTimeout(function(){
+ Total_Time.setMinutes(1,59,0);
+ var stop=false;
+	var startTime=new Date().getTime();
+	var time_difference=setInterval(
+		function(){
+	var currentTime=new Date().getTime();
+	var difference=currentTime-startTime;
+    var minutes=Math.floor((difference%(1000*60*60)/(1000*60)));
+    var seconds=Math.floor((difference%(1000*60))/1000);
+    
+     
+     var Minutes_countDown=(Total_Time.getMinutes()-minutes);
+     var seconds_countDown=(Total_Time.getSeconds()-seconds);
+     var zero_char="";
+     if(seconds_countDown<10)
+     {
+             zero_char="0";
+     }
+     document.getElementById("timer").innerHTML="timer: 0"+Minutes_countDown+":"+zero_char+seconds_countDown;
+
+     if(Minutes_countDown===0 && seconds_countDown===0)
+     {stop=true;}
+     if(stop==true)
+	{
+		clearInterval(time_difference);
+	}
+    
+	});
+},10000);
+
+}
 Game_board.prototype.Change_Game_board = function()
 {
   var char_img =document.getElementsByClassName('img1')
@@ -199,7 +235,10 @@ Game_board.prototype.Change_Game_board = function()
       char_img[i].src='img/box.png';
     }
   },7000)
+
+
 }
+
 Game_board.prototype.Game_result = function()
 {
   var char_img =document.getElementsByClassName('img1');
@@ -213,7 +252,10 @@ Game_board.prototype.Game_result = function()
       else {
         e.target.src='img/sinfor.png';
       }
+   counter++;
+console.log(counter);
     }
+
   }
   var box_img =document.getElementsByClassName('img2')
   for (var i = 0; i < box_img.length; i++) {
@@ -223,7 +265,35 @@ Game_board.prototype.Game_result = function()
     }
   }
 }
+Game_board.prototype.GetValueOfTimer=function()
+{
+var stop_flag=false;
+
+ var TimeInterval=setInterval(function(){
+ var Timer_Value=document.getElementById("timer").innerHTML;
+ Split_TimeValues=Timer_Value.split(":");
+ console.log(Split_TimeValues[2]);
+
+  if(counter==2 && parseInt(Split_TimeValues[1])==1 &&parseInt(Split_TimeValues[2])>=30)
+  {
+    stop_flag=true;
+    alert("you have got a faster badge");
+
+  }
+if(stop_flag==true)
+{
+clearInterval(TimeInterval);
+}
+
+},1000);
+
+
+
+}
 var Board_1=new Game_board(1,1,1);
 Board_1.Prepare_Game_board();
 var id=setInterval(function(){Board_1.Start_Game_board()},1);
 Board_1.End_Game_board(id);
+Board_1.timer();
+Board_1.GetValueOfTimer();
+

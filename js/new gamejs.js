@@ -26,13 +26,13 @@ function soundFunction(){
 	if(sndflag===0)
 	{
 		snd.pause();
-	    sound.innerHTML='<img src="image/nosound.png" />';
+	    sound.innerHTML='<img src="img/nosound.png" />';
 	    sndflag=1;
 	}
 	else if (sndflag===1)
 	{
 		snd.play();
-	    sound.innerHTML='<img src="image/sound.png" />';
+	    sound.innerHTML='<img src="img/sound.png" />';
 	    sndflag=0;
 	}
 	

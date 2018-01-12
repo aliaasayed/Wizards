@@ -95,8 +95,12 @@ position:fixed;
   display: none;
 }
 .lives
-{
-
+{ 
+  float: left;
   width:30px;
   height: 30px;
+}
+#timer
+{
+  float: right;
 }

@@ -1,13 +1,51 @@
 body {
 background-size: cover;
+background-position: absolute;
 }
 
-#pressany{
-font-family:Comic Sans MS, Comic Sans, cursive ;
-font-size: 35px;
-color:#cc6600;
-position: absolute;
-top: 560px;
-left: 420px;
-right:420px;
+#logo {
+    position: fixed;
+    top: -15%;
+}
+
+.button {
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  width: 250px;
+  cursor: pointer;
+  outline: none;
+  color: #FFD700;
+  background-color: #4682B4; 
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 5px #999; /*shadow color*/
+}
+.button:hover {background-color: #396a93}
+
+.button:active {
+  background-color:	#FFD700; 
+  color: #4682B4;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+#startdiv {
+    height: 200px;
+    width: 400px;
+    position: fixed;
+    top: 83%;
+    left: 37%;   
+}
+#minion1 {
+    position: fixed;
+    bottom: 50%;
+    left: 60%;
+   
+}
+#sound img {
+    position: fixed ; /*absolute;*/
+    top: 1%;
+    right: 1%;
+    width: 50px;
+    height: 50px;
 }

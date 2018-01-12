@@ -9,10 +9,11 @@ var sound=document.getElementById("sound");
 sound.addEventListener("click", soundFunction);
 
 var clicksnd = new Audio("music/Click2.mp3");
-var snd = new Audio("music/Fantasy_Game_Background_Looping.mp3");
+var snd = new Audio("music/startpage.mp3");
 window.onload = function() {
     snd.play();
 }
+snd.loop=true;
 function playFunction() {
 	clicksnd.play();
     //window.location = "http://www.google.com/";

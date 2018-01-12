@@ -1,3 +1,6 @@
+var i=-1;
+var counter=0;
+var level=0;
 /*Begin choose character js*/
 var smurfs_Link=false;
 var minions_Link=false;
@@ -21,21 +24,27 @@ Imgs[1].addEventListener("click",clicked_func_m);
 /*End choose character js*/
 
 /*Begin map level js*/
-var level=0;
+
 function level_map(){
+  console.log("level_map");
   level++;
-  //var Board_1;
+  var interval=0;
   var image=document.getElementById('ch');
+ document.getElementById("content").innerHTML=""
+ document.getElementById("live").innerHTML=""
   //console.log(minions_Link)
   if(minions_Link==true)
   {
     image.setAttribute("src","img/minion.png");
-    var Board_1=new Game_board(1,level,1);
+     var Board_1=new Game_board(1,level);
+     Board_1.Set_lives_image(1);
+     
   }
   else if(smurfs_Link==true)
   {
     image.setAttribute("src","img/sinfor.png");
-    var Board_1=new Game_board(2,level,1);
+     var Board_1=new Game_board(2,level);
+     Board_1.Set_lives_image(2);
   }
   if(level==1)
   {
@@ -44,6 +53,8 @@ function level_map(){
       image.style.position = "absolute";
     	image.style.right="950px";
     },1000)
+    
+ 
   }
   else if (level==2)
   {
@@ -52,7 +63,7 @@ function level_map(){
     	image.style.position = "absolute";
     	image.style.right="650px";
     },1000)
-
+   
   }
   else if (level==3)
   {
@@ -61,12 +72,16 @@ function level_map(){
       image.style.position = "absolute";
       image.style.right="350px";
     },1000)
+  
   }
+  Board_1.Set_lives(3);
   Board_1.Prepare_Game_board();
   var id=setInterval(function(){Board_1.Start_Game_board()},1);
   Board_1.End_Game_board(id);
   Board_1.timer();
   Board_1.GetValueOfTimer();
+  counter=0;
+  
 }
 
 var next = document.getElementsByTagName('button')
@@ -76,14 +91,13 @@ next[0].addEventListener('click',function() {
   document.getElementsByClassName('game')[0].style.display="block";
 })
 /*End map level js*/
-var i=-1;
-var counter=0;
+
 var Game_object =function(src_image)
 {
     this.x_current;
     this.y_current;
-    this.step_x=5;
-    this.step_y=5;
+    this.step_x=0;
+    this.step_y=0;
     this.img;
     this.Set_step_x= function(step_x)
     {
@@ -152,20 +166,33 @@ Game_object.prototype.Get_y_current = function()
 {
     return this.y_current;
 };
-var Game_board=function(char,level_no,character)
+var Game_board=function(char,level_no)
 {
     this.level;
-    this.counter=0;
+    this.lives=3;
+    this.choosen_character;
     //localStorage.setItem("level_no",this.level);
     this.char=char;
-    //this.timer;
-    this.character;
     this.Game_object_arr =[];
+    this.Set_counter=function(cou) {
+    this.counter=cou
+    };
+    this.Get_counter=function()
+    {
+      return this.counter;
+    };
     this.Set_level(level_no);
     this.Set_Game_object_arr();
     this.Prepare_Game_board();
     this.Start_Game_board();
-    this.Set_character(char);
+    this.Set_lives =function(lives){
+      this.lives=lives
+    }
+    this.Set_lives_image(char);
+    this.Get_character=function(){ return this.choosen_character};
+    this.Get_lives=function(){
+      return this.lives;
+    };
     this.Change_Game_board();
     this.End_Game_board= function(interval)
     {
@@ -177,21 +204,28 @@ var Game_board=function(char,level_no,character)
     this.Game_result();
 }
 
-Game_board.prototype.Set_character = function(char)
+Game_board.prototype.Set_lives_image = function(char)
 {
-    this.character=new Image;
+    this.choosen_character=new Image;
+    (this.choosen_character).className="lives";
     if(char==1)
     {
-      this.character.src="img/minion.png";
+      this.choosen_character.src="img/minion.png";
     }
-    else if (char==2)
+    else 
     {
-      this.character.src="img/sinfor.png";
+      this.choosen_character.src="img/sinfor.png";
     }
-    else
-    {
-      this.character.src="img/box.png";
+
+    var lives=document.getElementById("live");
+   for(var j=0;j<4;j++)
+    { 
+      
+        lives.appendChild(this.choosen_character)
+        
+
     }
+  
 };
 Game_board.prototype.Set_level = function(level_no)
 {
@@ -206,12 +240,14 @@ Game_board.prototype.Set_Game_object_arr = function()
         boxes_o_num =5;
     }
     else if (this.level ==2)
-    {
+    {   
+        this.Game_object_arr=[]
         chars_num =4;
         boxes_o_num =8;
     }
     else
     {
+        this.Game_object_arr=[]
         chars_num =6;
         boxes_o_num =10;
     }
@@ -237,11 +273,32 @@ Game_board.prototype.Set_Game_object_arr = function()
 Game_board.prototype.Prepare_Game_board = function()
 {
     var content=document.getElementById("content");
+    
     for(var i=0;i<this.Game_object_arr.length;i++)
     {
        content.appendChild(this.Game_object_arr[i].Get_image());
+      
+      if(this.level==1)
+      { 
+        console.log("level 1 prepare");
+         this.Game_object_arr[i].Set_step_x(10)
+       this.Game_object_arr[i].Set_step_y(10)
+      }
+      else if(this.level==2)
+      {  
+        console.log("level 2 prepare");
+         this.Game_object_arr[i].Set_step_x(15)
+       this.Game_object_arr[i].Set_step_y(15)
+      }
+      else
+      {
+        this.Game_object_arr[i].Set_step_x(22)
+       this.Game_object_arr[i].Set_step_y(22)
 
+      }
+   
     }
+    counter=0;
 };
 Game_board.prototype.Start_Game_board = function()
 {
@@ -332,6 +389,7 @@ Game_board.prototype.Change_Game_board = function()
 }
 Game_board.prototype.Game_result = function()
 {
+  console.log("Game_result");
   var char_img =document.getElementsByClassName('img1');
   var ch=this.char;
   for (var i = 0; i < char_img.length; i++) {
@@ -341,8 +399,9 @@ Game_board.prototype.Game_result = function()
       e.target.src='img/minion.png';
       counter++;
       //this.counter=counter;
+      console.log(counter);
       cou(counter)
-      //console.log(this.counter);
+      
     }
       else {
         e.target.src='img/sinfor.png';
@@ -350,7 +409,7 @@ Game_board.prototype.Game_result = function()
         cou(counter)
       }
     }
-    //console.log(this.counter)
+  
   }
   function cou(counter)
   {
@@ -378,10 +437,23 @@ Game_board.prototype.Game_result = function()
 }
 //console.log(counter)
   var box_img =document.getElementsByClassName('img2')
+  var lives=this.lives
+  var lives_images=document.getElementsByClassName("lives")
   for (var i = 0; i < box_img.length; i++) {
     box_img[i].onclick=function()
     {
-      alert("looooser");
+     
+      lives=lives-1;
+      
+      if(lives==0)
+      {
+        alert("Game Over")
+        level=0;
+       
+        /* Go to start game */
+      }
+
+      //alert("looooser");
       //window.location.assign('level map.html')
     }
   }

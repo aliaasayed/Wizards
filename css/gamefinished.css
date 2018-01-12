@@ -2,10 +2,9 @@ body {
 text-align: center;
 background-size:cover; 
 background-repeat: no-repeat;
-cursor: pointer;
 }
 h1 { 
-	color: blue;
+	color: #4682B4;
 	 font-family: 'Trocchi', serif;
 	font-size: 45px; 
 	font-weight: normal; 
@@ -20,7 +19,13 @@ h2 {
 	line-height: 32px;
  	margin: 0 0 24px;
  }
-
+#win{
+    top:50%;
+    right: 50%;
+ }
+#yellow{
+    color: #FFD700;
+}
 #text {
 position: absolute;
     left:520px;
@@ -34,7 +39,7 @@ position: absolute;
 #trumb {
 position: absolute;
     right:20px;
-    top: 33px;
+    top: 60px;
     width: 230px;
     padding: 10px;
     height: 210px;
@@ -78,4 +83,10 @@ position: absolute;
     padding: 10px;
     height: 220px;
 }
+#sound img {
+    position: fixed ; 
+    top: 1%;
+    right: 1%;
+    width: 50px;
+    height: 50px;
 }

@@ -1,3 +1,8 @@
+body{
+  background-image:url("../img/bg12.png");
+  background-size:cover; 
+  background-repeat: no-repeat;
+}
 /*choose character*/
 .choose_character
 {
@@ -86,9 +91,12 @@ position:fixed;
 }
 .game{
   display: none;
-  background-color: black;
-  width: 800px;
-  height: 500px;
+  background-color: yellow;
+  position: center;
+  margin-top: 90px;
+  width: 900px;
+  height: 450px;
+  border-radius: 5%;
 }
 #header
 {

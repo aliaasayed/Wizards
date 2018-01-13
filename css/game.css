@@ -91,7 +91,7 @@ position:fixed;
 }
 .game{
   display: none;
-  background-color: yellow;
+background-color: yellow;
   position: center;
   margin-top: 90px;
   width: 900px;
@@ -103,7 +103,7 @@ position:fixed;
   display: none;
 }
 .lives
-{ 
+{
   float: left;
   width:30px;
   height: 30px;
@@ -111,4 +111,60 @@ position:fixed;
 #timer
 {
   float: right;
+}
+
+/*badges css*/
+.modal{
+  font-family: 'Lobster', Georgia, Times, serif;
+  font-size: 29px;
+  line-height: 40px;
+  text-align: center;
+  border-style: solid;
+  border-width: 8px;
+  display:none;
+  position: absolute;
+  right: 250px;
+  left: 350px;
+  top:120;
+  height:90%;
+  overflow: auto;
+}
+
+#simpleModal{
+color: #660033;
+border-color: #660033;
+background-color:#66cccc;
+}
+
+#simpleModal2{
+color: #660000;
+border-color: #660000;
+background-color:#cccc66;
+}
+
+#simpleModal3{
+color: #990033;
+border-color: #990033;
+background-color:#ffcc99;
+}
+
+.closeButtons {
+position: absolute;
+left: 710px;
+top:9px;
+color: black ;
+float : right;
+font-size :55px;
+cursor: pointer;
+color: #660033;
+}
+
+#hitimg {
+  height: 45%;
+  width: 50%;
+}
+#flashimg {
+  height: 25%;
+  width: 35%;
+}
 }

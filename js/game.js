@@ -275,7 +275,7 @@ Game_board.prototype.Set_Game_object_arr = function()
     else if (this.level ==2)
     {
         this.Game_object_arr=[]
-        chars_num =4;
+        chars_num =3;
         boxes_o_num =5;
         console.log("level 2 set")
 
@@ -283,7 +283,7 @@ Game_board.prototype.Set_Game_object_arr = function()
     else
     {
         this.Game_object_arr=[]
-        chars_num =6;
+        chars_num =4;
         boxes_o_num =6;
 
 
@@ -475,7 +475,7 @@ Game_board.prototype.Game_result = function()
       level_map();
     }
   }
-  if(counter==4 && this.level==2)
+  if(counter==3 && this.level==2)
   {
     document.getElementsByClassName('game')[0].style.display="none"
     document.getElementById('header').style.display="none"
@@ -483,18 +483,19 @@ Game_board.prototype.Game_result = function()
     level_map();
 
   }
-  if(counter==6 && this.level==3)
+  if(counter==4 && this.level==3)
   {
     document.getElementsByClassName('game')[0].style.display="none"
     document.getElementById('header').style.display="none"
     if(lives==3)
     {
       var modal2 = document.getElementById('simpleModal2');
-      var closeBtn2 = document.getElementById('closeModalBtn2');
       modal2.style.display = 'block';
-      closeBtn2.addEventListener('click', function () {
+      setTimeout(function(){
       modal2.style.display = 'none';
-      });
+      level=0;
+      level_map();
+      },1000);
     }
   }
 }
@@ -505,11 +506,23 @@ Game_board.prototype.Game_result = function()
     box_img[i].onclick=function()
     {
       lives=lives-1;
-      console.log(lives)
+    
       if(lives==0)
       {
-        window.location.assign('gamefinished.html')
+        //window.location.assign('gamefinished.html')
+        document.getElementsByClassName('game')[0].style.display="none"
+       document.getElementById('header').style.display="none"
+        var modal5 = document.getElementById('gameover');
+         modal5.style.display = 'block';
+        setTimeout(function(){
+        modal5.style.display = 'none';
+        document.getElementsByClassName('map')[0].style.display="block"
         level=0;
+        lives=3;
+        level_map();
+        
+      },3000)
+
       }
       lives_images.removeChild(lives_images.lastChild);
       if(badge_counter==2)

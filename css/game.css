@@ -193,7 +193,12 @@ border-color: #990033;
 background-color:#ffcc99;
 }
 
-.closeButtons {
+#gameover{
+color: #990033;
+border-color: #990033;
+background-color:#999999;
+}
+/*.closeButtons {
 position: absolute;
 left: 710px;
 top:9px;
@@ -202,7 +207,8 @@ float : right;
 font-size :55px;
 cursor: pointer;
 color: #660033;
-}
+}*/
+
 
 #hitimg {
   height: 45%;

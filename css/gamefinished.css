@@ -6,7 +6,7 @@ background-repeat: no-repeat;
 h1 { 
 	color: #4682B4;
 	font-family: 'Lobster', Georgia, Times, serif;
-	font-size: 45px; 
+	font-size: 60px; 
 	font-weight: normal; 
  	line-height: 48px;  
 }
@@ -22,7 +22,7 @@ h1 {
 
 #text {
     position: absolute;
-    left:520px;
+    left:500px;
     right:270px;
     top: 190px;
     width: 300px;
@@ -41,8 +41,8 @@ h1 {
 
 #btn {
   position: absolute;
-  top:520px;
-  left: 550px;
+  top:420px;
+  left: 535px;
   padding: 15px 25px;
   font-size: 24px;
   text-align: center;

@@ -1,7 +1,52 @@
+var sndflag=0;
+var play=document.getElementById("play")
+play.addEventListener("click", playFunction);
+
+var help=document.getElementById("help")
+help.addEventListener("click", helpFunction);
+
+var sound=document.getElementById("sound");
+sound.addEventListener("click", soundFunction);
+
+var clicksnd = new Audio("music/Click2.mp3");
+var snd = new Audio("music/startpage.mp3");
+window.onload = function() {
+    snd.play();
+}
+snd.loop=true;
+function playFunction() {
+  clicksnd.play();
+	document.getElementsByClassName('new_game')[0].style.display='none'
+  document.getElementsByClassName('choose_character')[0].style.display='block'
+    //window.location = "http://www.google.com/";
+}
+function helpFunction() {
+	clicksnd.play();
+   // window.location = "http://www.youtube.com/";
+}
+function soundFunction(){
+	clicksnd.play();
+	if(sndflag===0)
+	{
+		snd.pause();
+	    sound.innerHTML='<img src="img/nosound.png" />';
+	    sndflag=1;
+	}
+	else if (sndflag===1)
+	{
+		snd.play();
+	    sound.innerHTML='<img src="img/sound.png" />';
+	    sndflag=0;
+	}
+
+}
+
+/**********************************/
 var i=-1;
 var counter=0;
 var level=0;
-var lives=2;
+var lives=3;
+var badge_counter=0;
 /*Begin choose character js*/
 var smurfs_Link=false;
 var minions_Link=false;
@@ -38,14 +83,13 @@ function level_map(){
   {
     image.setAttribute("src","img/minion.png");
      Board_1=new Game_board(1,level);
-    // Board_1.Set_lives_image(1);
-     
+
   }
   else if(smurfs_Link==true)
   {
     image.setAttribute("src","img/sinfor.png");
      Board_1=new Game_board(2,level);
-    // Board_1.Set_lives_image(2);
+
   }
   if(level==1)
   {
@@ -54,8 +98,8 @@ function level_map(){
       image.style.position = "absolute";
     	image.style.right="950px";
     },1000)
-    
- 
+
+
   }
   else if (level==2)
   {
@@ -64,7 +108,7 @@ function level_map(){
     	image.style.position = "absolute";
     	image.style.right="650px";
     },1000)
-   
+
   }
   else if (level==3)
   {
@@ -73,26 +117,28 @@ function level_map(){
       image.style.position = "absolute";
       image.style.right="350px";
     },1000)
-  
-  }
-  Board_1.Prepare_Game_board();
-  console.log(lives)
-  var id=setInterval(function(){Board_1.Start_Game_board()},1);
-  Board_1.End_Game_board(id);
-  Board_1.timer();
-  Board_1.GetValueOfTimer();
-  counter=0;
-  //lives=3;
-}
 
-var next = document.getElementsByTagName('button')
-next[0].addEventListener('click',function() {
+  }
+
+ //counter=0
+  setTimeout(function() {
   document.getElementsByClassName('map')[0].style.display="none";
   document.getElementById('header').style.display="block";
   document.getElementsByClassName('game')[0].style.display="block";
-})
-/*End map level js*/
+  Board_1.Prepare_Game_board();
+  console.log(lives)
+  var id=setInterval(function(){Board_1.Start_Game_board()},1);
+  Board_1.Change_Game_board();
+  Board_1.End_Game_board(id);
+  Board_1.Game_result();
+  Board_1.timer();
+  Board_1.GetValueOfTimer();
+  counter=0;
+  
+},2000)
 
+}
+/*End map level js*/
 var Game_object =function(src_image)
 {
     this.x_current;
@@ -128,11 +174,11 @@ var Game_object =function(src_image)
 
 Game_object.prototype.ini_x_current = function()
 {
-    this.x_current=Math.floor(Math.random()*400)+1;
+    this.x_current=Math.floor(Math.random()*(550-400))+400;
 };
 Game_object.prototype.ini_y_current = function()
 {
- 	  this.y_current=Math.floor(Math.random()*700)+1;
+ 	  this.y_current=Math.floor(Math.random()*(1070-500))+500;
 };
 Game_object.prototype.Set_image = function(src_image)
 {
@@ -171,13 +217,10 @@ var Game_board=function(char,level_no)
 {
     this.level;
     this.choosen_character;
-    //localStorage.setItem("level_no",this.level);
     this.char=char;
     this.Game_object_arr =[];
     this.Set_level(level_no);
     this.Set_Game_object_arr();
-    this.Prepare_Game_board();
-    this.Start_Game_board();
     this.Set_lives =function(lives){
       this.lives=lives
     }
@@ -186,39 +229,34 @@ var Game_board=function(char,level_no)
     this.Get_lives=function(){
       return this.lives;
     };
-    this.Change_Game_board();
     this.End_Game_board= function(interval)
     {
         setTimeout(function () {
-
         clearInterval(interval);
-      },10000)
+      },12000)
     };
-    this.Game_result();
 }
 
 Game_board.prototype.Set_lives_image = function(char)
 {
+  var li=document.getElementById("live");
+  for(var j=0;j<lives;j++)
+  {
     this.choosen_character=new Image;
     (this.choosen_character).className="lives";
     if(char==1)
     {
       this.choosen_character.src="img/minion.png";
     }
-    else 
+    else
     {
       this.choosen_character.src="img/sinfor.png";
     }
 
-    var live=document.getElementById("live");
-   for(var j=0;j<lives;j++)
-    { 
-        
-        live.appendChild(this.choosen_character)
-        //console.log(j)
+        li.appendChild(this.choosen_character)
 
     }
-  
+
 };
 Game_board.prototype.Set_level = function(level_no)
 {
@@ -226,26 +264,29 @@ Game_board.prototype.Set_level = function(level_no)
 };
 Game_board.prototype.Set_Game_object_arr = function()
 {
+  console.log("inside srt game board araay")
     var chars_num , boxes_o_num ;
     if (this.level ==1)
     {
         chars_num =2;
-        boxes_o_num =5;
-        //console.log("level 1 set")
+        boxes_o_num =4;
+        console.log("level 1 set")
     }
     else if (this.level ==2)
-    {   
+    {
         this.Game_object_arr=[]
         chars_num =4;
-        boxes_o_num =8;
-       // console.log("level 2 set")
+        boxes_o_num =5;
+        console.log("level 2 set")
+
     }
     else
     {
         this.Game_object_arr=[]
         chars_num =6;
-        boxes_o_num =10;
-        //console.log("level 3 set")
+        boxes_o_num =6;
+
+
     }
     for (var i=0;i<chars_num;i++)
     {
@@ -259,7 +300,7 @@ Game_board.prototype.Set_Game_object_arr = function()
         }
         this.Game_object_arr.push(game_obj);
     }
-    
+
     for (var i=0;i<boxes_o_num;i++)
     {
         var game_obj = new Game_object("img/box.png");
@@ -269,30 +310,30 @@ Game_board.prototype.Set_Game_object_arr = function()
 Game_board.prototype.Prepare_Game_board = function()
 {
     var content=document.getElementById("content");
-    
+
     for(var i=0;i<this.Game_object_arr.length;i++)
     {
        content.appendChild(this.Game_object_arr[i].Get_image());
-      
+
       if(this.level==1)
-      { 
-        //console.log("level 1 prepare");
-         this.Game_object_arr[i].Set_step_x(10)
-       this.Game_object_arr[i].Set_step_y(10)
+      {
+        console.log("level 1 prepare");
+         this.Game_object_arr[i].Set_step_x(5)
+       this.Game_object_arr[i].Set_step_y(5)
       }
       else if(this.level==2)
-      {  
-        //console.log("level 2 prepare");
-         this.Game_object_arr[i].Set_step_x(15)
-       this.Game_object_arr[i].Set_step_y(15)
+      {
+        console.log("level 2 prepare");
+         this.Game_object_arr[i].Set_step_x(7)
+       this.Game_object_arr[i].Set_step_y(7)
       }
       else
       {
-        this.Game_object_arr[i].Set_step_x(22)
-       this.Game_object_arr[i].Set_step_y(22)
+        this.Game_object_arr[i].Set_step_x(9)
+       this.Game_object_arr[i].Set_step_y(9)
 
       }
-   
+
     }
     counter=0;
 };
@@ -309,12 +350,12 @@ Game_board.prototype.Start_Game_board = function()
     var x=this.Game_object_arr[i].Get_step_x();
 
     var y=this.Game_object_arr[i].Get_step_y();
-    if((xcurr>=445) || (xcurr<=0))
+    if((xcurr>=550) || (xcurr<=10))
     {
       this.Game_object_arr[i].Set_step_x(-x);
 
     }
-    if((ycurr>=770) || (ycurr<=0))
+    if((ycurr>=1075) || (ycurr<=230))
     {
       this.Game_object_arr[i].Set_step_y(-y);
     }
@@ -394,26 +435,45 @@ Game_board.prototype.Game_result = function()
       {
       e.target.src='img/minion.png';
       counter++;
-      //console.log(counter);
+
+      badge_counter++;
+      console.log(counter);
       cou(counter)
-      
+
     }
       else {
         e.target.src='img/sinfor.png';
         counter++;
+        badge_counter++;
         cou(counter)
       }
     }
-  
+
   }
   function cou(counter)
   {
+
   if(counter==2 && this.level==1)
   {
     document.getElementsByClassName('game')[0].style.display="none"
     document.getElementById('header').style.display="none"
-    document.getElementsByClassName('map')[0].style.display="block"
-    level_map();
+    if(badge_counter==2)
+    {
+      console.log("inside badge2")
+      var modal = document.getElementById('simpleModal');
+      var closeBtn = document.getElementById('closeModalBtn');
+      modal.style.display = 'block';
+      //closeBtn.addEventListener('click', function () {
+      setTimeout(function(){
+        modal.style.display = 'none';
+        document.getElementsByClassName('map')[0].style.display="block"
+        level_map();
+      },1000)
+    }
+    else{
+      document.getElementsByClassName('map')[0].style.display="block"
+      level_map();
+    }
   }
   if(counter==4 && this.level==2)
   {
@@ -421,39 +481,45 @@ Game_board.prototype.Game_result = function()
     document.getElementById('header').style.display="none"
     document.getElementsByClassName('map')[0].style.display="block"
     level_map();
+
   }
   if(counter==6 && this.level==3)
   {
     document.getElementsByClassName('game')[0].style.display="none"
     document.getElementById('header').style.display="none"
-    document.getElementsByClassName('map')[0].style.display="block"
-    level_map();
+    if(lives==3)
+    {
+      var modal2 = document.getElementById('simpleModal2');
+      var closeBtn2 = document.getElementById('closeModalBtn2');
+      modal2.style.display = 'block';
+      closeBtn2.addEventListener('click', function () {
+      modal2.style.display = 'none';
+      });
+    }
   }
 }
-//console.log(counter)
   var box_img =document.getElementsByClassName('img2')
   var lives_images=document.getElementById("live")
   console.log(lives_images)
   for (var i = 0; i < box_img.length; i++) {
     box_img[i].onclick=function()
     {
-      
-
       lives=lives-1;
       console.log(lives)
       if(lives==0)
       {
-        alert("Game Over")
+        window.location.assign('gamefinished.html')
         level=0;
-       
-        /* Go to start game */
       }
-      
       lives_images.removeChild(lives_images.lastChild);
-      
-      
-      //alert("looooser");
-      //window.location.assign('level map.html')
+      if(badge_counter==2)
+      {
+        badge_counter=2
+      }
+      else
+      {
+        badge_counter=0
+      }
     }
   }
 }

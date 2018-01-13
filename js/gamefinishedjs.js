@@ -3,7 +3,7 @@ var sound=document.getElementById("sound");
 sound.addEventListener("click", soundFunction);
 
 var clicksnd = new Audio("music/Click2.mp3");
-var snd = new Audio("music/gamefinished.mp3");
+var snd = new Audio("music/gamestartfinished.mp3");
 
 window.onload = function() {
     snd.play();

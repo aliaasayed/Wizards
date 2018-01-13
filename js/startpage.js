@@ -1,7 +1,7 @@
 var sndflag=0;
 
 var clicksnd = new Audio("music/Click2.mp3");
-var snd = new Audio("music/startpage.mp3");
+var snd = new Audio("music/gamestartfinished.mp3");
 window.onload = function() {
     snd.play();
 }

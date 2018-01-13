@@ -516,10 +516,11 @@ Game_board.prototype.Game_result = function()
          modal5.style.display = 'block';
         setTimeout(function(){
         modal5.style.display = 'none';
-        document.getElementsByClassName('map')[0].style.display="block"
+        smurfs_Link=false;
+        minions_Link=false;
+        document.getElementsByClassName('choose_character')[0].style.display="block"
         level=0;
         lives=3;
-        level_map();
         
       },3000)
 

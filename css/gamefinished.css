@@ -5,29 +5,23 @@ background-repeat: no-repeat;
 }
 h1 { 
 	color: #4682B4;
-	 font-family: 'Trocchi', serif;
+	font-family: 'Lobster', Georgia, Times, serif;
 	font-size: 45px; 
 	font-weight: normal; 
- 	line-height: 48px; margin: 0; 
+ 	line-height: 48px;  
 }
 
-h2 { 
-	color: blue; 
-	font-family: 'Source Sans Pro', sans-serif;
-	font-size: 28px; 
-	font-weight: 400;
-	line-height: 32px;
- 	margin: 0 0 24px;
- }
 #win{
     top:50%;
     right: 50%;
  }
+
 #yellow{
     color: #FFD700;
 }
+
 #text {
-position: absolute;
+    position: absolute;
     left:520px;
     right:270px;
     top: 190px;
@@ -37,7 +31,7 @@ position: absolute;
 }
 
 #trumb {
-position: absolute;
+    position: absolute;
     right:20px;
     top: 60px;
     width: 230px;
@@ -45,14 +39,22 @@ position: absolute;
     height: 210px;
 }
 
-#drum {
-	position: absolute;
-    left:450px;
-    right:330px;
-    top: 400px;
-    width: 410px;
-    height: 220;
-    padding: 10px;
+#btn {
+  position: absolute;
+  top:520px;
+  left: 550px;
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  width: 250px;
+  cursor: pointer;
+  outline: none;
+  color:#4682B4;/*blue*/
+  background-color:#FFD700;/*yellow*/  
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 5px #999; /*shadow color*/
+  display: block;
 }
 
 #tar {

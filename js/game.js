@@ -269,14 +269,14 @@ Game_board.prototype.Set_Game_object_arr = function()
     if (this.level ==1)
     {
         chars_num =2;
-        boxes_o_num =4;
+        boxes_o_num =0;
         console.log("level 1 set")
     }
     else if (this.level ==2)
     {
         this.Game_object_arr=[]
         chars_num =3;
-        boxes_o_num =5;
+        boxes_o_num =0;
         console.log("level 2 set")
 
     }
@@ -284,7 +284,7 @@ Game_board.prototype.Set_Game_object_arr = function()
     {
         this.Game_object_arr=[]
         chars_num =4;
-        boxes_o_num =6;
+        boxes_o_num =0;
 
 
     }
@@ -493,8 +493,9 @@ Game_board.prototype.Game_result = function()
       modal2.style.display = 'block';
       setTimeout(function(){
       modal2.style.display = 'none';
-      level=0;
-      level_map();
+      window.location.assign('gamefinished.html')
+      /*level=0;
+      level_map();*/
       },1000);
     }
   }
@@ -509,7 +510,6 @@ Game_board.prototype.Game_result = function()
     
       if(lives==0)
       {
-        //window.location.assign('gamefinished.html')
         document.getElementsByClassName('game')[0].style.display="none"
        document.getElementById('header').style.display="none"
         var modal5 = document.getElementById('gameover');

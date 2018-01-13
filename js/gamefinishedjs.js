@@ -24,3 +24,10 @@ function soundFunction(){
 	    sndflag=0;
 	}
 }
+
+var rebutton = document.getElementById('btn');
+rebutton.onclick = function() {
+
+	window.location.href="startpage.html";
+
+	}

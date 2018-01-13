@@ -1,12 +1,55 @@
 body{
   background-image:url("../img/bg12.png");
-  background-size:cover; 
+  background-size:cover;
   background-repeat: no-repeat;
+  cursor: pointer;
+}
+.new_game
+{
+  display: block;
+}
+#sound img {
+    position: fixed ;
+    top: 1%;
+    right: 1%;
+    width: 50px;
+    height: 50px;
+}
+.button {
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  width: 250px;
+  cursor: pointer;
+  outline: none;
+  color:#4682B4;/*blue*/
+  background-color:#FFD700;/*yellow*/
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 5px #999; /*shadow color*/
+  display: block;
+}
+.button:hover {background-color:#e6c300 }
+
+.button:active {
+  background-color:#4682B4	;
+  color: #FFD700;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.menu {
+    height: 200px;
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -150px;
 }
 /*choose character*/
 .choose_character
 {
-  display: block;
+  display: none;
 }
 #s {
   position: absolute;
@@ -91,11 +134,11 @@ position:fixed;
 }
 .game{
   display: none;
-background-color: yellow;
+  background-color: white;
   position: center;
-  margin-top: 90px;
+  margin-top: -20px;
   width: 900px;
-  height: 450px;
+  height: 630px;
   border-radius: 5%;
 }
 #header
@@ -104,13 +147,15 @@ background-color: yellow;
 }
 .lives
 {
-  float: left;
   width:30px;
   height: 30px;
 }
+#live{
+margin-left: 250px;
+}
 #timer
 {
-  float: right;
+margin-left:680px;
 }
 
 /*badges css*/
@@ -168,3 +213,4 @@ color: #660033;
   width: 35%;
 }
 }
+/*****************/

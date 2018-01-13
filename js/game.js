@@ -407,7 +407,7 @@ Game_board.prototype.GetValueOfTimer=function()
     if(counter==2 && parseInt(Split_TimeValues[1])==1 &&parseInt(Split_TimeValues[2])>=30)
     {
     stop_flag=true;
-    alert("you have got a faster badge");
+    //alert("you have got a faster badge");
     }
     if(stop_flag==true)
     {
@@ -461,7 +461,7 @@ Game_board.prototype.Game_result = function()
     {
       console.log("inside badge2")
       var modal = document.getElementById('simpleModal');
-      var closeBtn = document.getElementById('closeModalBtn');
+      //var closeBtn = document.getElementById('closeModalBtn');
       modal.style.display = 'block';
       //closeBtn.addEventListener('click', function () {
       setTimeout(function(){

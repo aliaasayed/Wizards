@@ -30,7 +30,7 @@ function startfunction()
 }
 function loadfunction()
 {
-	window.location.href="new game.html";
+	window.location.href="game.html";
 }
 var startdiv=document.getElementById("startdiv")
 var start=document.getElementById("start")

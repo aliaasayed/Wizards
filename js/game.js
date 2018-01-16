@@ -1,4 +1,5 @@
 var sndflag=0;
+var time_difference;
 var play=document.getElementById("play")
 play.addEventListener("click", playFunction);
 
@@ -107,6 +108,8 @@ function level_map(){
     {
     	image.style.position = "absolute";
     	image.style.right="650px";
+ var bubble=document.getElementById("second_b"); 
+bubble.style.filter="brightness(120%)";
     },1000)
 
   }
@@ -116,6 +119,8 @@ function level_map(){
     {
       image.style.position = "absolute";
       image.style.right="350px";
+      var bubble=document.getElementById("third_b"); 
+bubble.style.filter="brightness(120%)";
     },1000)
 
   }
@@ -131,8 +136,25 @@ function level_map(){
   Board_1.Change_Game_board();
   Board_1.End_Game_board(id);
   Board_1.Game_result();
-  Board_1.timer();
+ clearInterval(time_difference);
+ document.getElementById("timer").innerHTML="";
+if(level==1)
+{
+
+Board_1.timer(12000);
+
+
+
+}
+ else if(level==2 || level==3)
+{
+
+Board_1.timer(11000);
+
+} 
   Board_1.GetValueOfTimer();
+ 
+
   counter=0;
   
 },2000)
@@ -269,14 +291,14 @@ Game_board.prototype.Set_Game_object_arr = function()
     if (this.level ==1)
     {
         chars_num =2;
-        boxes_o_num =0;
+        boxes_o_num =2;
         console.log("level 1 set")
     }
     else if (this.level ==2)
     {
         this.Game_object_arr=[]
         chars_num =3;
-        boxes_o_num =0;
+        boxes_o_num =3;
         console.log("level 2 set")
 
     }
@@ -284,7 +306,7 @@ Game_board.prototype.Set_Game_object_arr = function()
     {
         this.Game_object_arr=[]
         chars_num =4;
-        boxes_o_num =0;
+        boxes_o_num =3;
 
 
     }
@@ -324,13 +346,13 @@ Game_board.prototype.Prepare_Game_board = function()
       else if(this.level==2)
       {
         console.log("level 2 prepare");
-         this.Game_object_arr[i].Set_step_x(7)
-       this.Game_object_arr[i].Set_step_y(7)
+         this.Game_object_arr[i].Set_step_x(6)
+       this.Game_object_arr[i].Set_step_y(6)
       }
       else
       {
-        this.Game_object_arr[i].Set_step_x(9)
-       this.Game_object_arr[i].Set_step_y(9)
+        this.Game_object_arr[i].Set_step_x(7)
+       this.Game_object_arr[i].Set_step_y(7)
 
       }
 
@@ -366,14 +388,14 @@ Game_board.prototype.Start_Game_board = function()
     (this.Game_object_arr[i].img).style.left = this.Game_object_arr[i].Get_y_current() + 'px';
 
 };
-Game_board.prototype.timer=function()
+Game_board.prototype.timer=function(milliseconds)
 {
     var Total_Time=new Date();
     setTimeout(function(){
-    Total_Time.setMinutes(1,59,0);
+    Total_Time.setMinutes(0,59,0);
     var stop=false;
     var startTime=new Date().getTime();
-    var time_difference=setInterval(
+    time_difference=setInterval(
     function(){
     var currentTime=new Date().getTime();
     var difference=currentTime-startTime;
@@ -386,7 +408,7 @@ Game_board.prototype.timer=function()
     {
        zero_char="0";
     }
-    document.getElementById("timer").innerHTML="timer: 0"+Minutes_countDown+":"+zero_char+seconds_countDown;
+    document.getElementById("timer").innerHTML="0"+Minutes_countDown+":"+zero_char+seconds_countDown;
     if(Minutes_countDown===0 && seconds_countDown===0)
     {stop=true;}
     if(stop==true)
@@ -394,17 +416,22 @@ Game_board.prototype.timer=function()
     clearInterval(time_difference);
     }
     });
-    },10000);
+    },milliseconds);
 }
 
 Game_board.prototype.GetValueOfTimer=function()
 {
     var stop_flag=false;
+    var counter_flag=false;
     var TimeInterval=setInterval(function(){
     var Timer_Value=document.getElementById("timer").innerHTML;
     Split_TimeValues=Timer_Value.split(":");
     //console.log(Split_TimeValues[2]);
-    if(counter==2 && parseInt(Split_TimeValues[1])==1 &&parseInt(Split_TimeValues[2])>=30)
+if((level==1&& counter==2)||(level==2&& counter==3)||(level==3&& counter==4))
+{
+counter_flag=true;
+}
+    if(counter_flag==true && parseInt(Split_TimeValues[1])==1 &&parseInt(Split_TimeValues[2])>=30)
     {
     stop_flag=true;
     //alert("you have got a faster badge");

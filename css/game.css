@@ -15,6 +15,33 @@ body{
     width: 50px;
     height: 50px;
 }
+.first_Level
+{
+ position: absolute;
+ bottom: 150px;
+  right: 1020px;
+  color: black;
+font-family: 'Lobster', Georgia, Times, serif;
+font-size: 50px;
+}
+.second_Level
+{
+ position: absolute;
+ bottom: 150px;
+  right: 720px;
+  color: black;
+font-family: 'Lobster', Georgia, Times, serif;
+font-size: 50px;
+}
+.third_Level
+{
+ position: absolute;
+ bottom: 150px;
+  right: 430px;
+  color: black;
+font-family: 'Lobster', Georgia, Times, serif;
+font-size: 50px;
+}
 .button {
   padding: 15px 25px;
   font-size: 24px;
@@ -53,10 +80,10 @@ body{
 }
 #s {
   position: absolute;
-  right: 680px;
-  bottom: 50px;
-  width: 350px;
-  height: 500px;
+  right: 800px;
+  bottom: 130px;
+  width: 200px;
+  height: 400px;
 }
 #s:hover {
   transform: scale(1.2);
@@ -65,10 +92,10 @@ body{
 
 #m {
   position: absolute;
-  right: 250px;
-  bottom: 50px;
-  width: 500px;
-  height: 500px;
+  right: 380px;
+  bottom: 120px;
+  width: 400px;
+  height: 400px;
 }
 
 #m:hover {
@@ -153,9 +180,20 @@ position:fixed;
 #live{
 margin-left: 250px;
 }
-#timer
+#timer_img
 {
-margin-left:680px;
+  background-image:url("../img/Timer_img.png");
+    background-repeat: no-repeat;
+   position: absolute;
+    right:350px;
+    width:50px;
+    height:50px;
+}
+#timer 
+{ 
+ margin-left:650px;
+font-family: 'Lobster', Georgia, Times, serif;
+font-size: 20px;
 }
 
 /*badges css*/

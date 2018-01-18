@@ -108,7 +108,7 @@ function level_map(){
     {
     	image.style.position = "absolute";
     	image.style.right="650px";
- var bubble=document.getElementById("second_b"); 
+ var bubble=document.getElementById("second_b");
 bubble.style.filter="brightness(120%)";
     },1000)
 
@@ -119,7 +119,7 @@ bubble.style.filter="brightness(120%)";
     {
       image.style.position = "absolute";
       image.style.right="350px";
-      var bubble=document.getElementById("third_b"); 
+      var bubble=document.getElementById("third_b");
 bubble.style.filter="brightness(120%)";
     },1000)
 
@@ -151,12 +151,12 @@ Board_1.timer(12000);
 
 Board_1.timer(11000);
 
-} 
+}
   Board_1.GetValueOfTimer();
- 
+
 
   counter=0;
-  
+
 },2000)
 
 }
@@ -430,6 +430,13 @@ Game_board.prototype.GetValueOfTimer=function()
 if((level==1&& counter==2)||(level==2&& counter==3)||(level==3&& counter==4))
 {
 counter_flag=true;
+var modal2 = document.getElementById('simpleModal2');
+//var closeBtn = document.getElementById('closeModalBtn');
+modal2.style.display = 'block';
+//closeBtn.addEventListener('click', function () {
+setTimeout(function(){
+  modal2.style.display = 'none';
+},1900)
 }
     if(counter_flag==true && parseInt(Split_TimeValues[1])==1 &&parseInt(Split_TimeValues[2])>=30)
     {
@@ -495,7 +502,7 @@ Game_board.prototype.Game_result = function()
         modal.style.display = 'none';
         document.getElementsByClassName('map')[0].style.display="block"
         level_map();
-      },1000)
+      },2000)
     }
     else{
       document.getElementsByClassName('map')[0].style.display="block"
@@ -534,7 +541,7 @@ Game_board.prototype.Game_result = function()
     box_img[i].onclick=function()
     {
       lives=lives-1;
-    
+
       if(lives==0)
       {
         document.getElementsByClassName('game')[0].style.display="none"
@@ -548,7 +555,7 @@ Game_board.prototype.Game_result = function()
         document.getElementsByClassName('choose_character')[0].style.display="block"
         level=0;
         lives=3;
-        
+
       },3000)
 
       }

@@ -430,12 +430,12 @@ Game_board.prototype.GetValueOfTimer=function()
 if((level==1&& counter==2)||(level==2&& counter==3)||(level==3&& counter==4))
 {
 counter_flag=true;
-var modal2 = document.getElementById('simpleModal2');
+var modal3 = document.getElementById('simpleModal3');
 //var closeBtn = document.getElementById('closeModalBtn');
-modal2.style.display = 'block';
+modal3.style.display = 'block';
 //closeBtn.addEventListener('click', function () {
 setTimeout(function(){
-  modal2.style.display = 'none';
+  modal3.style.display = 'none';
 },1900)
 }
     if(counter_flag==true && parseInt(Split_TimeValues[1])==1 &&parseInt(Split_TimeValues[2])>=30)
@@ -502,7 +502,7 @@ Game_board.prototype.Game_result = function()
         modal.style.display = 'none';
         document.getElementsByClassName('map')[0].style.display="block"
         level_map();
-      },2000)
+      },2500)
     }
     else{
       document.getElementsByClassName('map')[0].style.display="block"
@@ -530,7 +530,7 @@ Game_board.prototype.Game_result = function()
       window.location.assign('gamefinished.html')
       /*level=0;
       level_map();*/
-      },1000);
+    },2500);
     }
   }
 }
